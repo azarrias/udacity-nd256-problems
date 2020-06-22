@@ -1,7 +1,8 @@
 from Graph import Graph, GraphNode
 from collections import deque
 
-def dfs_search(start_node, search_value):
+# Iterative version of Depth First Search using a stack
+def dfs_iterative(start_node, search_value):
     visited = set()
     stack = deque()
     stack.append(start_node)
@@ -15,6 +16,24 @@ def dfs_search(start_node, search_value):
         for neighbour in current_node.neighbours:
             if neighbour not in visited:
                 stack.append(neighbour)
+
+# Recursive version without the necessity of a stack
+def dfs_recursive(start_node, search_value):
+    visited = set()
+    return dfs_recursive_helper(start_node, visited, search_value)
+
+def dfs_recursive_helper(node, visited, search_value):
+    if node.value == search_value:
+        return node
+
+    result = None
+    visited.add(node)
+    for neighbour in node.neighbours:
+        if neighbour not in visited:
+            result = dfs_recursive_helper(neighbour, visited, search_value)
+            if result:
+                break
+    return result
     
 if __name__ == '__main__':
     nodeG = GraphNode('G')
@@ -33,6 +52,11 @@ if __name__ == '__main__':
     graph1.add_edge(nodeH,nodeP)
     graph1.add_edge(nodeS,nodeR)
 
-    assert nodeA == dfs_search(nodeS, 'A')
-    assert nodeS == dfs_search(nodeP, 'S')
-    assert nodeR == dfs_search(nodeH, 'R')
+    assert nodeA == dfs_iterative(nodeS, 'A')
+    assert nodeS == dfs_iterative(nodeP, 'S')
+    assert nodeR == dfs_iterative(nodeH, 'R')
+
+    assert nodeA == dfs_recursive(nodeG, 'A')
+    assert nodeA == dfs_recursive(nodeS, 'A')
+    assert nodeS == dfs_recursive(nodeP, 'S')
+    assert nodeR == dfs_recursive(nodeH, 'R')
