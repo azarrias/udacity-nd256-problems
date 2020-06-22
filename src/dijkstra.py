@@ -1,4 +1,4 @@
-from Graph import Graph
+from Graph import SimpleGraph
 
 """
 Find the shortest path from the source node to every other node in the given graph.
@@ -30,7 +30,7 @@ def dijkstra(graph, source):
 
 if __name__ == '__main__':
     # Test 1
-    testGraph = Graph()
+    testGraph = SimpleGraph()
     for node in ['A', 'B', 'C', 'D', 'E']:
         testGraph.add_node(node)
 
@@ -44,7 +44,7 @@ if __name__ == '__main__':
     print(dijkstra(testGraph, 'A'))     # {'A': 0, 'D': 2, 'B': 3, 'E': 3, 'C': 4}
 
     # Test 2
-    graph = Graph()
+    graph = SimpleGraph()
     for node in ['A', 'B', 'C']:
         graph.add_node(node)
     
@@ -54,7 +54,7 @@ if __name__ == '__main__':
     print(dijkstra(graph, 'A'))        # {'A': 0, 'C': 10, 'B': 5}
 
     # Test 3
-    graph = Graph()
+    graph = SimpleGraph()
     for node in ['A', 'B', 'C', 'D', 'E', 'F']:
         graph.add_node(node)
     

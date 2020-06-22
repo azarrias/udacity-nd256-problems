@@ -1,6 +1,32 @@
-# Helper Code
 from collections import defaultdict
-class Graph:
+
+class GraphNode(object):
+    def __init__(self, val):
+        self.value = val
+        self.neighbours = []
+        
+    def add_neighbour(self,new_node):
+        self.neighbours.append(new_node)
+    
+    def remove_neighbour(self,del_node):
+        if del_node in self.neighbours:
+            self.neighbours.remove(del_node)
+
+class Graph(object):
+    def __init__(self,node_list):
+        self.nodes = node_list
+        
+    def add_edge(self,node1,node2):
+        if(node1 in self.nodes and node2 in self.nodes):
+            node1.add_neighbour(node2)
+            node2.add_neighbour(node1)
+            
+    def remove_edge(self,node1,node2):
+        if(node1 in self.nodes and node2 in self.nodes):
+            node1.remove_neighbour(node2)
+            node2.remove_neighbour(node1)
+
+class SimpleGraph:
     def __init__(self):
         self.nodes = set()                   # A set cannot contain duplicate nodes
         self.neighbours = defaultdict(list)  # Defaultdict is a child class of Dictionary that provides a default value for a key that does not exists.
