@@ -1,27 +1,33 @@
 from collections import defaultdict
 
 class GraphNode(object):
-    def __init__(self, val):
-        self.value = val
-        self.neighbours = []
+    def __init__(self, label):
+        self.label = label
+        self.edges = []
         
-    def add_neighbour(self,new_node):
-        self.neighbours.append(new_node)
+    def add_neighbour(self, node, cost=None):
+        self.edges.append(GraphEdge(node, cost))
     
-    def remove_neighbour(self,del_node):
-        if del_node in self.neighbours:
-            self.neighbours.remove(del_node)
+    def remove_neighbour(self, node):
+        for edge in self.edges:
+            if edge.target_node == node:
+                self.edges.remove(edge)
+
+class GraphEdge(object):
+    def __init__(self, target_node, cost):
+        self.target_node = target_node
+        self.cost = cost
 
 class Graph(object):
     def __init__(self,node_list):
         self.nodes = node_list
         
-    def add_edge(self,node1,node2):
+    def add_edge(self, node1, node2, cost = None):
         if(node1 in self.nodes and node2 in self.nodes):
-            node1.add_neighbour(node2)
-            node2.add_neighbour(node1)
+            node1.add_neighbour(node2, cost)
+            node2.add_neighbour(node1, cost)
             
-    def remove_edge(self,node1,node2):
+    def remove_edge(self, node1, node2):
         if(node1 in self.nodes and node2 in self.nodes):
             node1.remove_neighbour(node2)
             node2.remove_neighbour(node1)

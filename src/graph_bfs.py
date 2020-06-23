@@ -2,7 +2,7 @@ from Graph import Graph, GraphNode
 from collections import deque
 
 # Iterative version of Breadth First Search using a queue
-def bfs_iterative(start_node, search_value):
+def bfs_iterative(start_node, search_label):
     visited = set()
     queue = deque()
     queue.append(start_node)
@@ -10,12 +10,12 @@ def bfs_iterative(start_node, search_value):
     while len(queue) > 0:
         current_node = queue.popleft() #dequeue
         visited.add(current_node)
-        if current_node.value == search_value:
+        if current_node.label == search_label:
             return current_node
 
-        for neighbour in current_node.neighbours:
-            if neighbour not in visited:
-                queue.append(neighbour) #enqueue
+        for edge in current_node.edges:
+            if edge.target_node not in visited:
+                queue.append(edge.target_node) #enqueue
     
 if __name__ == '__main__':
     nodeG = GraphNode('G')

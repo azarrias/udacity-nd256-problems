@@ -2,7 +2,7 @@ from Graph import Graph, GraphNode
 from collections import deque
 
 # Iterative version of Depth First Search using a stack
-def dfs_iterative(start_node, search_value):
+def dfs_iterative(start_node, search_label):
     visited = set()
     stack = deque()
     stack.append(start_node)
@@ -10,27 +10,27 @@ def dfs_iterative(start_node, search_value):
     while len(stack) > 0:
         current_node = stack.pop()
         visited.add(current_node)
-        if current_node.value == search_value:
+        if current_node.label == search_label:
             return current_node
 
-        for neighbour in current_node.neighbours:
-            if neighbour not in visited:
-                stack.append(neighbour)
+        for edge in current_node.edges:
+            if edge.target_node not in visited:
+                stack.append(edge.target_node)
 
 # Recursive version without the necessity of a stack
-def dfs_recursive(start_node, search_value):
+def dfs_recursive(start_node, search_label):
     visited = set()
-    return dfs_recursive_helper(start_node, visited, search_value)
+    return dfs_recursive_helper(start_node, visited, search_label)
 
-def dfs_recursive_helper(node, visited, search_value):
-    if node.value == search_value:
+def dfs_recursive_helper(node, visited, search_label):
+    if node.label == search_label:
         return node
 
     result = None
     visited.add(node)
-    for neighbour in node.neighbours:
-        if neighbour not in visited:
-            result = dfs_recursive_helper(neighbour, visited, search_value)
+    for edge in node.edges:
+        if edge.target_node not in visited:
+            result = dfs_recursive_helper(edge.target_node, visited, search_label)
             if result:
                 break
     return result
