@@ -1,5 +1,6 @@
 """
 Longest Common Subsequence
+Dynamic Programming
 
 In text analysis, it is often useful to compare the similarity of two texts 
 (imagine if you were trying to determine plagiarism between a source and 

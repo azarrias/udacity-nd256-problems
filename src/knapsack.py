@@ -1,5 +1,7 @@
 """
 Knapsack Problem
+Dynamic Programming
+
 Maximize value of items that we can fit in a theoretical Knapsack.
 Given an associated weight and value for each item and maximum weight
 capacity for the knapsack.
