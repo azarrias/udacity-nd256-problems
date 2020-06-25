@@ -32,7 +32,6 @@ In this example if we are connecting bridges like this...
     between 4 and 3 with cost = 2
 ...then we connect all 4 islands with cost = 6 which is the minimum traveling cost.
 """
-from Graph import Graph, GraphNode, GraphEdge
 import heapq
 
 """ 
@@ -75,7 +74,6 @@ def get_minimum_cost_of_connecting(bridge_config):
     return prim(graph)
 
 def test_function(test_case):
-    num_islands = test_case[0]
     bridge_config = test_case[1]
     solution = test_case[2]
     output = get_minimum_cost_of_connecting(bridge_config)
