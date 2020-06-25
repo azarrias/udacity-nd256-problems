@@ -5,6 +5,7 @@ Find the shortest path from the source node to every other node in the given gra
 Note - This implementation of the Dijkstra's algorithm is not very efficient. 
 Currently it has a O(n^2) time complexity. We will see a better version in the next 
 lesson - "Graph Algorithms" with O(nlogn) time complexity.
+Dijkstra's algorithm does not work if the are edges with negative weights.
 """
 def dijkstra(graph, source):
     # Declare and initialize result, unvisited, and path
